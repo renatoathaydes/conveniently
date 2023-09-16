@@ -71,6 +71,7 @@ final class MappingFailureException<V> implements Exception {
   /// The original [Result] that was being mapped.
   final Result<V> originalResult;
 
+  /// Create an instance of [MappingFailureException].
   const MappingFailureException(this.mappingFailure, this.originalResult);
 
   @override
@@ -86,15 +87,19 @@ final class Ok<V> extends Result<V> {
   /// The successful value.
   final V value;
 
+  /// Returns false.
   @override
   get isError => false;
 
+  /// Returns null.
   @override
   get failureOrNull => null;
 
+  /// Returns the successful value.
   @override
-  get successOrNull => value;
+  V get successOrNull => value;
 
+  /// Const constructor.
   const Ok(this.value);
 
   @override
@@ -135,15 +140,19 @@ final class Fail<V> extends Result<V> {
   /// The exception that caused this failure.
   final Exception exception;
 
+  /// Returns true.
   @override
   get isError => true;
 
+  /// Returns the [exception].
   @override
-  get failureOrNull => exception;
+  Exception get failureOrNull => exception;
 
+  /// Returns `null`.
   @override
   get successOrNull => null;
 
+  /// Const constructor.
   const Fail(this.exception);
 
   @override
