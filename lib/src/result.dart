@@ -1,18 +1,44 @@
+/// Result of a computation that may fail.
+///
+/// [Result] has two constructors, [Result.ok] and [Result.fail].
+/// These may be used to create [Result] instances directly, or the
+/// [catching] and [catching$] functions may be used for convenience.
+///
+/// To check which case a [Result] represents, use pattern matching:
+///
+/// ```dart
+/// final result = await catching(() { ... });
+/// return switch(result) {
+///   Ok(value: var v) => 'Success: $v',
+///   Fail(exception: var e) => 'Failure: $e',
+/// };
+/// ```
+///
+/// You can also check its type directly (e.g. `result is Ok`) or use the
+/// getters [isError], [successOrNull] and [failureOrNull].
 sealed class Result<V> {
+  /// Returns `true` if this is a [Fail], false otherwise.
   abstract final bool isError;
 
+  /// The successful value if this is [Ok], null otherwise.
   abstract final V? successOrNull;
 
+  /// The failure Exception if this is [Fail], null otherwise.
   abstract final Exception? failureOrNull;
 
+  /// Const constructor.
   const Result();
 
+  /// Create an [Ok] instance.
   factory Result.ok(V value) => Ok(value);
 
+  /// Create a [Fail] instance.
   factory Result.fail(Exception e) => Fail(e);
 }
 
+/// Success case of [Result].
 final class Ok<V> extends Result<V> {
+  /// The successful value.
   final V value;
 
   @override
@@ -39,7 +65,9 @@ final class Ok<V> extends Result<V> {
   }
 }
 
+/// Failure case of [Result].
 final class Fail<V> extends Result<V> {
+  /// The exception that caused this failure.
   final Exception exception;
 
   @override

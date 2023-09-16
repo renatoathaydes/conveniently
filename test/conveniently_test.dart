@@ -124,6 +124,20 @@ void main() {
       expect(counter, equals(103));
     });
 
+    test('times (not waiting for iterations)', () async {
+      final times = <int>[];
+      final start = DateTime.now().millisecondsSinceEpoch;
+      Future<void> go() async {
+        await Future.delayed(const Duration(milliseconds: 25));
+        times.add(DateTime.now().millisecondsSinceEpoch);
+      }
+
+      await 5.times(go, waitIterations: false);
+      expect(times, hasLength(5));
+      expect(times, everyElement(greaterThan(start + 24)));
+      expect(times, everyElement(lessThan(start + 100)));
+    }, retry: 2);
+
     test(r'timesIndex', () async {
       final list = <int>[];
       Future<void> add(int i) async => list.add(i);
@@ -139,5 +153,26 @@ void main() {
       await 100.timesIndex(add);
       expect(list, equals(List.generate(100, (index) => index)));
     });
+
+    test('timesIndex (not waiting for iterations)', () async {
+      final timesAndIndexes = <(int, int)>[];
+      final start = DateTime.now().millisecondsSinceEpoch;
+      Future<void> go(i) async {
+        await Future.delayed(const Duration(milliseconds: 25));
+        timesAndIndexes.add((i + 1, DateTime.now().millisecondsSinceEpoch));
+      }
+
+      await 5.timesIndex(go, waitIterations: false);
+
+      final times = timesAndIndexes.map((i) => i.$2).toList();
+      expect(times, hasLength(5));
+      expect(times, everyElement(greaterThan(start + 24)));
+      expect(times, everyElement(lessThan(start + 100)));
+
+      final indexes = timesAndIndexes.map((i) => i.$1).toSet();
+      expect(indexes, hasLength(5));
+      expect(indexes, everyElement(greaterThan(0)));
+      expect(indexes, everyElement(lessThan(6)));
+    }, retry: 2);
   });
 }
