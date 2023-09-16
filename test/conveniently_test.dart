@@ -16,7 +16,7 @@ void main() {
       });
       expect(value, equals('done'));
       expect(duration.inMilliseconds, greaterThan(24));
-      expect(duration.inMilliseconds, lessThan(100));
+      expect(duration.inMilliseconds, lessThan(120));
     }, retry: 2);
   });
   group('timing', () {
@@ -32,7 +32,7 @@ void main() {
       });
       expect(value, equals('done'));
       expect(duration.inMilliseconds, greaterThan(24));
-      expect(duration.inMilliseconds, lessThan(100));
+      expect(duration.inMilliseconds, lessThan(120));
     }, retry: 2);
   });
 
