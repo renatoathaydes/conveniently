@@ -30,6 +30,11 @@ void main() {
       .vmap(
           (s) => print(s.toUpperCase())); // prints 'V NOT NULL HERE: 305987627'
 
+  // `not` can be used to negate a predicate
+  bool isEven(int n) => n % 2 == 0;
+  final isOdd = isEven.not$;
+  print([1, 2, 3, 4].where(isOdd)); // prints (1, 3)
+
   // convert Exceptions to values to enforce error checking
   final result = catching$(() => 'function that may throw');
 

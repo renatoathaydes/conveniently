@@ -189,4 +189,22 @@ void main() {
       expect(indexes, everyElement(lessThan(6)));
     }, retry: 2);
   });
+
+  group('predicates', () {
+    test(r'not$', () {
+      const set = {'a', 'b'};
+      expect([].where(set.contains.not$).toList(), equals([]));
+      expect(['a', 'b'].where(set.contains.not$).toList(), equals([]));
+      expect(['a', 'b', 'c'].where(set.contains.not$).toList(), equals(['c']));
+      expect(['d', 'c'].where(set.contains.not$).toList(), equals(['d', 'c']));
+    });
+    test('not', () async {
+      const set = {'a', 'b'};
+      Future<bool> containsAsync(String obj) async => set.contains(obj);
+      final Future<bool> Function(String) notContainsAsync = containsAsync.not;
+
+      expect(await notContainsAsync('a'), isFalse);
+      expect(await notContainsAsync('d'), isTrue);
+    });
+  });
 }

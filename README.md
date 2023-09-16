@@ -108,6 +108,11 @@ each iteration should wait for the previous one to complete before starting.
 By default, `waitIterations` is `true`. Setting it to `false` causes all iterations to start
 immediately.
 
+### on `bool Function(T)` and `Future<bool> Function(T)` (predicates)
+
+* `not`   - negate an asynchronous predicate.
+* `not$`  - negate a synchronous predicate.
+
 ## Examples
 
 ```dart
@@ -142,6 +147,11 @@ void main() {
       .apply$(print) // use side-effect operations with apply/apply$
       .vmap(
           (s) => print(s.toUpperCase())); // prints 'V NOT NULL HERE: 305987627'
+
+  // `not` can be used to negate a predicate
+  bool isEven(int n) => n % 2 == 0;
+  final isOdd = isEven.not$;
+  print([1, 2, 3, 4].where(isOdd)); // prints (1, 3)
 
   // convert Exceptions to values to enforce error checking
   final result = catching$(() => 'function that may throw');

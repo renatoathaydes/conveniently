@@ -7,4 +7,5 @@ export 'src/any.dart';
 export 'src/functions.dart';
 export 'src/int.dart';
 export 'src/null.dart';
+export 'src/predicate.dart';
 export 'src/result.dart';

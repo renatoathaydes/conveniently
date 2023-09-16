@@ -108,6 +108,11 @@ each iteration should wait for the previous one to complete before starting.
 By default, `waitIterations` is `true`. Setting it to `false` causes all iterations to start
 immediately.
 
+### on `bool Function(T)` and `Future<bool> Function(T)` (predicates)
+
+* `not`   - negate an asynchronous predicate.
+* `not$`  - negate a synchronous predicate.
+
 ## Examples
 
 ```dart
