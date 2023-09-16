@@ -1,4 +1,4 @@
-name: Conveniently Multiplatform Build and Tests
+name: conveniently-build
 
 on: [push]
 
@@ -22,6 +22,6 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Dartle Tests
-          path: reports/*.json
+          name: Conveniently Tests
+          path: build/*.json
           reporter: dart-json

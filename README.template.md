@@ -10,7 +10,7 @@ once you know they exist.
 > A few functions have both synchronous and async versions. In such cases, the synchronous
 > function's name appends `$` to the async function's name.
 > The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
-> a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head. 
+> a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head.
 
 ## Types
 
