@@ -7,10 +7,8 @@ Write Dart code more conveniently.
 This is a tiny package that offers some very convenient utilities that you may use quite often
 once you know they exist.
 
-> A few functions have both synchronous and async versions. In such cases, the synchronous
-> function's name appends `$` to the async function's name.
-> The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
-> a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head.
+![conveniently](https://github.com/renatoathaydes/conveniently/workflows/conveniently-build/badge.svg)
+[![pub package](https://img.shields.io/pub/v/conveniently.svg)](https://pub.dev/packages/conveniently)
 
 ## Types
 
@@ -40,6 +38,11 @@ result = Result.fail(FormatException());
 ```
 
 ## Top-level functions
+
+> A few functions have both synchronous and async versions. In such cases, the synchronous
+> function's name appends `$` to the async function's name.
+> The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
+> a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head.
 
 * `timing`    - time a computation (asynchronous).
 * `timing$`   - time a computation (synchronous).
