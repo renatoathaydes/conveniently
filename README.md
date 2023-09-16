@@ -14,8 +14,13 @@ once you know they exist.
 
 ### `Result<V>`
 
-The only type it exports is `Result`, for error checking, which you normally obtain by calling
-`catching` or `catching$` (see more examples at the end of this page).
+The `Result` type is used to represent the result of a computation. It may be either successful
+(an instance of `Ok`) or a failure (of type `Fail`).
+
+It helps enforce error checking as the caller of a function returning `Result` is forced to
+_inspect_ the returned value for errors, as opposed to with `Exception`s.
+
+You normally obtain a `Result` by calling `catching` or `catching$` (see more examples at the end of this page).
 
 ```dart
 final result = catching$(() {
@@ -29,12 +34,24 @@ Object value = switch (result) {
 };
 ```
 
-You can also create `Result` by invoking its factory methods:
+You can also create a `Result` by invoking its factory methods:
 
 ```dart
 Result<String> result;
 result = Result.ok('yes');
 result = Result.fail(FormatException());
+```
+
+To change the type `V` of a `Result<V>`, use its `map` or `flatMap` functions.
+
+> If the mapper function throws, `map` and `flatMap` return a `Fail` Result with a
+> `MappingFailureException` within it.
+
+Example:
+
+```dart
+
+Result<int> result = Result.ok('yes').map((s) => s.length);
 ```
 
 ## Top-level functions
