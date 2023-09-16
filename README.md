@@ -1,3 +1,5 @@
+<!--                  DO NOT EDIT                        -->
+<!-- This file is auto-generated from README.template.md -->
 # Conveniently.
 
 Write Dart code more conveniently.
@@ -18,7 +20,6 @@ The only type it exports is `Result`, for error checking, which you normally obt
 `catching` or `catching$` (see more examples at the end of this page).
 
 ```dart
-
 final result = catching$(() {
   // run computation that may throw
 });
@@ -34,10 +35,8 @@ You can also create `Result` by invoking its factory methods:
 
 ```dart
 Result<String> result;
-result = Result.ok
-('yes
-'
-);result = Result.fail(FormatException());
+result = Result.ok('yes');
+result = Result.fail(FormatException());
 ```
 
 ## Top-level functions
@@ -58,16 +57,15 @@ This is particularly convenient to _capture_ fields, e.g. in cases like this:
 ```dart
 class Person {
   final String? name;
-
   const Person(this.name);
 
   // DOES NOT COMPILE!
   // @override toString() {
-  // if (name == null) return '<No name>';
-  // Even though 'name' is final, a subtype could turn it into a mutable getter.
-  // return name.capitalize();
+    // if (name == null) return '<No name>';
+    // Even though 'name' is final, a subtype could turn it into a mutable getter.
+    // return name.capitalize();
   // }
-
+  
   @override toString() {
     // using `vmap`:
     return name?.vmap((n) => n.capitilize()) ?? '<No name>';
@@ -83,7 +81,6 @@ class Person {
 `orThrow` exists due to Dart not allowing this:
 
 ```dart
-
 Object? nullableValue = null;
 
 // In Dart, this is ok:
@@ -98,6 +95,18 @@ final nonNullValue = nullableValue!;
 // orThrow to the rescue
 final aValue = nullableValue.orThrow(() => ArgumentError('missing something', 'value'));
 ```
+
+### on `int`
+
+* `times`         - run some action N times, asynchronously.
+* `times$`        - run some action N times, synchronously.
+* `timesIndex`    - run some action N times taking an iteration index, asynchronously.
+* `timesIndex$`   - run some action N times taking an iteration index, synchronously.
+
+The async `times` functions accept an optional `waitIterations` parameter which determines whether
+each iteration should wait for the previous one to complete before starting.
+By default, `waitIterations` is `true`. Setting it to `false` causes all iterations to start
+immediately.
 
 ## Examples
 
@@ -150,3 +159,34 @@ void main() {
 }
 
 ```
+
+## Other interesting helper libraries
+
+* [dart-quiver](https://pub.dev/packages/quiver) - Quiver is a set of utility libraries for Dart that makes using many
+  Dart libraries easier and more convenient, or adds additional functionality.
+* [fpdart](https://pub.dev/packages/fpdart) - All the main functional programming types and patterns fully documented,
+  tested, and with examples.
+* [collection](https://pub.dev/packages/collection) - Contains utility functions and classes in the style
+  of `dart:collection`
+  to make working with collections easier.
+
+**Quiver** has lots of helper utilities grouped in a few libraries:
+
+* `quiver.async`
+* `quiver.cache`
+* `quiver.check`
+* `quiver.collection`
+* `quiver.core`
+* `quiver.string`
+* `quiver.time`
+
+And more...
+
+But no tiny functions like `conveniently`.
+
+**`fpdart`** is a much more comprehensive library for Functional Programming enthusiasts.
+`conveniently` doesn't try to provide anything like what `fpdart` does,
+(despite providing a few functions that are also helpful when doing FP) so it's a much smaller package.
+
+**`collection`** provides lots of helper functions that work with Dart collections. It's pretty good at that,
+which is why `conveniently` does not attempt to provide collections helpers at all.

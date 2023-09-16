@@ -1,5 +1,10 @@
 import 'dart:io';
 
+const warning = '''
+<!--                  DO NOT EDIT                        -->
+<!-- This file is auto-generated from README.template.md -->
+''';
+
 Future<void> main() async {
   final template = File('README.template.md');
   final readme = File('README.md');
@@ -7,6 +12,7 @@ Future<void> main() async {
 
   final readmeWriter = readme.openWrite();
   try {
+    readmeWriter.write(warning);
     for (final line in lines) {
       if (line.trimLeft().startsWith('--')) continue;
       readmeWriter.writeln(await _replaceVariables(line));

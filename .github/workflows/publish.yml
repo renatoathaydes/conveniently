@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Generate README
-        run: dart generateREADME.dart
+        run: dart generate_readme.dart
       - name: Build
         run: dart test
       - name: Publish

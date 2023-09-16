@@ -1,5 +1,5 @@
 -- This is a template!
--- run dart run generateREADME.dart to generate README.md from this file
+-- run dart run generate_readme.dart to generate README.md from this file
 # Conveniently.
 
 Write Dart code more conveniently.
@@ -96,8 +96,51 @@ final nonNullValue = nullableValue!;
 final aValue = nullableValue.orThrow(() => ArgumentError('missing something', 'value'));
 ```
 
+### on `int`
+
+* `times`         - run some action N times, asynchronously.
+* `times$`        - run some action N times, synchronously.
+* `timesIndex`    - run some action N times taking an iteration index, asynchronously.
+* `timesIndex$`   - run some action N times taking an iteration index, synchronously.
+
+The async `times` functions accept an optional `waitIterations` parameter which determines whether
+each iteration should wait for the previous one to complete before starting.
+By default, `waitIterations` is `true`. Setting it to `false` causes all iterations to start
+immediately.
+
 ## Examples
 
 ```dart
 {{ EXAMPLES }}
 ```
+
+## Other interesting helper libraries
+
+* [dart-quiver](https://pub.dev/packages/quiver) - Quiver is a set of utility libraries for Dart that makes using many
+  Dart libraries easier and more convenient, or adds additional functionality.
+* [fpdart](https://pub.dev/packages/fpdart) - All the main functional programming types and patterns fully documented,
+  tested, and with examples.
+* [collection](https://pub.dev/packages/collection) - Contains utility functions and classes in the style
+  of `dart:collection`
+  to make working with collections easier.
+
+**Quiver** has lots of helper utilities grouped in a few libraries:
+
+* `quiver.async`
+* `quiver.cache`
+* `quiver.check`
+* `quiver.collection`
+* `quiver.core`
+* `quiver.string`
+* `quiver.time`
+
+And more...
+
+But no tiny functions like `conveniently`.
+
+**`fpdart`** is a much more comprehensive library for Functional Programming enthusiasts.
+`conveniently` doesn't try to provide anything like what `fpdart` does,
+(despite providing a few functions that are also helpful when doing FP) so it's a much smaller package.
+
+**`collection`** provides lots of helper functions that work with Dart collections. It's pretty good at that,
+which is why `conveniently` does not attempt to provide collections helpers at all.
