@@ -34,6 +34,51 @@ sealed class Result<V> {
 
   /// Create a [Fail] instance.
   factory Result.fail(Exception e) => Fail(e);
+
+  /// Map over this [Result].
+  ///
+  /// If this is an [Ok] result, then the `success` mapper function is
+  /// called with the successful value, otherwise the `failure`
+  /// function is called with the failure (by default, the same failure
+  /// is returned).
+  ///
+  /// If either the [success] or [failure] functions throw, a [Fail]
+  /// Result is returned with a [MappingFailureException] failure.
+  Result<T> map<T>(T Function(V) success,
+      {Exception Function(Exception) failure = _identityException});
+
+  /// Map over this [Result].
+  ///
+  /// If this is an [Ok] result, then the `success` mapper function is
+  /// called with the successful value, otherwise the `failure`
+  /// function is called with the failure (by default, the same failure
+  /// is returned).
+  ///
+  /// If either the [success] or [failure] functions throw, a [Fail]
+  /// Result is returned with a [MappingFailureException] failure.
+  Result<T> flatMap<T>(Result<T> Function(V) success,
+      {Exception Function(Exception) failure = _identityException});
+}
+
+Exception _identityException(Exception e) => e;
+
+/// Exception that gets wrapped into a [Fail] result in case a [Result]
+/// mapping operation throws.
+final class MappingFailureException<V> implements Exception {
+  /// The cause of this [MappingFailureException].
+  final Exception mappingFailure;
+
+  /// The original [Result] that was being mapped.
+  final Result<V> originalResult;
+
+  const MappingFailureException(this.mappingFailure, this.originalResult);
+
+  @override
+  String toString() {
+    return 'MappingFailureException{'
+        'originalResult: $originalResult, '
+        'mappingFailure: $mappingFailure}';
+  }
 }
 
 /// Success case of [Result].
@@ -63,6 +108,26 @@ final class Ok<V> extends Result<V> {
   String toString() {
     return 'Ok{value: $value}';
   }
+
+  @override
+  Result<T> map<T>(T Function(V) success,
+      {Exception Function(Exception) failure = _identityException}) {
+    try {
+      return Ok(success(value));
+    } on Exception catch (e) {
+      return Fail(MappingFailureException(e, this));
+    }
+  }
+
+  @override
+  Result<T> flatMap<T>(Result<T> Function(V) success,
+      {Exception Function(Exception) failure = _identityException}) {
+    try {
+      return success(value);
+    } on Exception catch (e) {
+      return Fail(MappingFailureException(e, this));
+    }
+  }
 }
 
 /// Failure case of [Result].
@@ -91,5 +156,25 @@ final class Fail<V> extends Result<V> {
   @override
   String toString() {
     return 'Fail{exception: $exception}';
+  }
+
+  @override
+  Result<T> map<T>(T Function(V) success,
+      {Exception Function(Exception) failure = _identityException}) {
+    try {
+      return Fail(failure(exception));
+    } on Exception catch (e) {
+      return Fail(MappingFailureException(e, this));
+    }
+  }
+
+  @override
+  Result<T> flatMap<T>(Result<T> Function(V) success,
+      {Exception Function(Exception) failure = _identityException}) {
+    try {
+      return Fail(failure(exception));
+    } on Exception catch (e) {
+      return Fail(MappingFailureException(e, this));
+    }
   }
 }
