@@ -57,6 +57,20 @@ void main() {
           isA<Fail>().having((e) => e.exception.toString(), 'message',
               equals(Exception('bad').toString())));
     });
+    test(r'apply$', () {
+      final list = <int>[];
+      final result = list.apply$((l) => l.add(1));
+      expect(list, equals([1]));
+      expect(result, same(list));
+    });
+    test('apply', () async {
+      final list = <int>[];
+      final result = await list.apply((l) async => l
+        ..add(1)
+        ..add(2));
+      expect(list, equals([1, 2]));
+      expect(result, same(list));
+    });
   });
 
   group('nullable extensions', () {

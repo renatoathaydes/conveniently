@@ -26,6 +26,7 @@ void main() {
   nullable
       .vmapOr((s) => 'Some $s', () => 'default value')
       .vmap((v) => 'v not null here: ${v.hashCode}')
+      .apply$(print) // use side-effect operations with apply/apply$
       .vmap(
           (s) => print(s.toUpperCase())); // prints 'V NOT NULL HERE: 305987627'
 
