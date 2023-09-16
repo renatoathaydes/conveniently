@@ -8,6 +8,3 @@ pubspec.lock
 
 .idea/
 *.iml
-
-# The README page is generated from README.template.md
-README.md
