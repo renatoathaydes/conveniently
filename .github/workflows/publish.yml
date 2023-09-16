@@ -16,9 +16,7 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - name: Install dependencies
         run: dart pub get
-      - name: Generate README
-        run: dart generate_readme.dart
-      - name: Build
-        run: dart test
+      - name: Make
+        run: make
       - name: Publish
         run: dart pub publish --force
