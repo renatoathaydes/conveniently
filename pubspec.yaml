@@ -1,6 +1,6 @@
 name: conveniently
 description: Conveniently helps you write Dart code conveniently. It provides various extension functions for very common operations.
-version: 1.0.0
+version: 1.1.0
 repository: https://github.com/renatoathaydes/conveniently
 
 environment:
