@@ -41,3 +41,13 @@ Future<Result<V>> catching<V>(Future<V> Function() action) async {
     return Result.fail(Exception(e));
   }
 }
+
+/// Predicate function that always returns true.
+///
+/// This is meant to be used mostly as default value for function arguments.
+bool alwaysTrue(Object? anything) => true;
+
+/// Predicate function that always returns false.
+///
+/// This is meant to be used mostly as default value for function arguments.
+bool alwaysFalse(Object? anything) => false;

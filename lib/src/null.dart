@@ -1,3 +1,5 @@
+import 'package:conveniently/conveniently.dart';
+
 extension ConvenientlyNullable<V> on V? {
   /// Map over a nullable Dart value.
   ///
@@ -28,15 +30,17 @@ extension ConvenientlyNullable<V> on V? {
 
   /// Check that this value is not null.
   ///
-  /// If this value is null, the given [throwable] function is called, which
+  /// If this value is null or `accept` returns `false` when called with the
+  /// non-null value, then the given [throwable] function is called, which
   /// may either throw an Exception itself, or return a value that will be
   /// thrown.
   ///
-  /// By default, `Exception('unexpected null value')` is thrown.
-  V orThrow([Object Function()? throwable]) {
+  /// By default, `Exception('unexpected value: $value')` is thrown.
+  V orThrow(
+      [Object Function()? throwable, bool Function(V) accept = alwaysTrue]) {
     final value = this;
-    if (value == null) {
-      throw throwable?.call() ?? Exception('unexpected null value');
+    if (value == null || !accept(value)) {
+      throw throwable?.call() ?? Exception('unexpected value: $value');
     }
     return value;
   }

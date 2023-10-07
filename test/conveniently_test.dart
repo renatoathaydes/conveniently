@@ -71,6 +71,12 @@ void main() {
       expect(list, equals([1, 2]));
       expect(result, same(list));
     });
+    test('alwaysTrue', () {
+      expect([1, 2, 3].where(alwaysTrue).toList(), equals([1, 2, 3]));
+    });
+    test('alwaysFalse', () {
+      expect([1, 2, 3].where(alwaysFalse).toList(), isEmpty);
+    });
   });
 
   group('nullable extensions', () {
