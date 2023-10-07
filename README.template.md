@@ -79,7 +79,7 @@ The `catching` functions return a `Result<T>` and never throw, which enforces th
 
 * `vmap`    - map over any value.
 * `apply`   - call a given function taking the receiver, return the receiver (asynchronous).
-* `apply$`  - call a given function taking the receiver, return the receiver (asynchronous).
+* `apply$`  - call a given function taking the receiver, return the receiver (synchronous).
 
 This is particularly convenient to _capture_ fields, e.g. in cases like this:
 
@@ -97,7 +97,7 @@ class Person {
   
   @override toString() {
     // using `vmap` and `apply`ing a side-effecting function 
-    return name?.vmap((n) => n.capitilize()).apply(print) ?? '<No name>';
+    return name?.vmap((n) => n.capitilize()).apply$(print) ?? '<No name>';
   }
 }
 ```
