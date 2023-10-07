@@ -70,7 +70,9 @@ Result<int> result = Result.ok('yes').map((s) => s.length);
 
 ### on `<T>` (any type, including nullable types)
 
-* `vmap`  - map over any value.
+* `vmap`    - map over any value.
+* `apply`   - call a given function taking the receiver, return the receiver (asynchronous).
+* `apply$`  - call a given function taking the receiver, return the receiver (asynchronous).
 
 This is particularly convenient to _capture_ fields, e.g. in cases like this:
 
@@ -87,8 +89,8 @@ class Person {
   // }
   
   @override toString() {
-    // using `vmap`:
-    return name?.vmap((n) => n.capitilize()) ?? '<No name>';
+    // using `vmap` and `apply`ing a side-effecting function 
+    return name?.vmap((n) => n.capitilize()).apply(print) ?? '<No name>';
   }
 }
 ```
