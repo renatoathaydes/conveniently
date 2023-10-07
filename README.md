@@ -61,10 +61,17 @@ Result<int> result = Result.ok('yes').map((s) => s.length);
 > The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
 > a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head.
 
-* `timing`    - time a computation (asynchronous).
-* `timing$`   - time a computation (synchronous).
-* `catching`  - enforce error handling (asynchronous).
-* `catching$`  - enforce error handling (synchronous).
+* `timing`      - time a computation (asynchronous).
+* `timing$`     - time a computation (synchronous).
+* `catching`    - enforce error handling (asynchronous).
+* `catching$`   - enforce error handling (synchronous).
+* `alwaysTrue`  - predicate function that always returns `true`.
+* `alwaysFalse` - predicate function that always returns `false`.
+
+The predicate functions above are very useful as default function argument values, given that Dart
+does not allow declaring a lambda for a default argument value.
+
+The `catching` functions return a `Result<T>` and never throw, which enforces that callers handle errors.
 
 ## Extension functions
 
