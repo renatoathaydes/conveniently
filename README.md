@@ -215,6 +215,26 @@ void main() {
   print('Result is error? ${result.isError}, '
       'success: ${result.successOrNull}, '
       'failure: ${result.failureOrNull}');
+
+  // Currying Examples
+
+  // given some function
+  String subStr(String s, int start, int end) {
+    return s.substring(start, end);
+  }
+
+  // we can curry the first argument:
+  final inputSlice = subStr.curry('My large input text');
+  print(inputSlice(0, 2)); // prints "My"
+  print(inputSlice(3, 8)); // prints "large"
+
+  // curry works on functions with up to 3 args
+  final inputEnd = inputSlice.curry(9);
+  print(inputEnd(14)); // prints "input"
+
+  // to curry something other than the first arg, use `rot` then `curry`
+  final inputStart = inputSlice.rot().curry(8);
+  print(inputStart(3)); // prints "large" again
 }
 
 ```
