@@ -9,3 +9,4 @@ export 'src/int.dart';
 export 'src/null.dart';
 export 'src/predicate.dart';
 export 'src/result.dart';
+export 'src/fun_extensions.dart';

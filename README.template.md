@@ -10,6 +10,13 @@ once you know they exist.
 ![conveniently](https://github.com/renatoathaydes/conveniently/workflows/conveniently-build/badge.svg)
 [![pub package](https://img.shields.io/pub/v/conveniently.svg)](https://pub.dev/packages/conveniently)
 
+> Many of the _conveniently_ functions come in both synchronous and async variants.
+> In such cases, the synchronous
+> function's name appends `$` to the async function's name.
+> The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
+> a better suffix as it's shorter and I believe programmers can quickly internalize that as
+> meaning `Sync` in their heads.
+
 ## Types
 
 ### `Result<V>`
@@ -55,11 +62,6 @@ Result<int> result = Result.ok('yes').map((s) => s.length);
 ```
 
 ## Top-level functions
-
-> A few functions have both synchronous and async versions. In such cases, the synchronous
-> function's name appends `$` to the async function's name.
-> The Dart stdlib normally adds the `Sync` suffix in such cases, but I thought `$` would be
-> a better suffix as it's shorter and I can quickly internalize it as meaning `Sync` in my head.
 
 * `timing`      - time a computation (asynchronous).
 * `timing$`     - time a computation (synchronous).
@@ -141,6 +143,24 @@ immediately.
 
 * `not`   - negate an asynchronous predicate.
 * `not$`  - negate a synchronous predicate.
+
+### `<A, R> on R Function(A)`
+
+* `curry` - curries a function taking one argument, returning a no-args function.
+
+### `<A, B, R> on R Function(A, B)`
+
+* `curry` - curries a function taking two arguments, returning a 1-arg function.
+* `curry2` - curries a function taking two arguments, returning a no-args function.
+* `rot` - rotates the order of the arguments of the function (`(A, B)` => `(B, A)`).
+
+### `<A, B, C, R> on R Function(A, B, C)`
+
+* `curry` - curries a function taking three arguments, returning a 2-arg function.
+* `curry2` - curries a function taking three arguments, returning a 1-arg function.
+* `curry3` - curries a function taking three arguments, returning a no-args function.
+* `rot` - rotates the order of the arguments of the function to the right (`(A, B, C)` => `(C, A, B)`).
+* `rotLeft` - rotates the order of the arguments of the function to the left (`(A, B, C)` => `(B, C, A)`).
 
 ## Examples
 

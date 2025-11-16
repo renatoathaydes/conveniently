@@ -37,6 +37,11 @@ void main() {
   });
 
   group('function helpers', () {
+    test('identity', () {
+      expect(identity('hi'), equals('hi'));
+      expect({1, 2}.map(identity).toList(), equals([1, 2]));
+    });
+
     test('vmap', () {
       expect(null.vmap((v) => v), isNull);
       expect(10.vmap((v) => v + 1), equals(11));

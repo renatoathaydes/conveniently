@@ -51,3 +51,6 @@ bool alwaysTrue(Object? anything) => true;
 ///
 /// This is meant to be used mostly as default value for function arguments.
 bool alwaysFalse(Object? anything) => false;
+
+/// The identity function.
+T identity<T>(T t) => t;
