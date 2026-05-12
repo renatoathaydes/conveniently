@@ -68,4 +68,18 @@ void main() {
   // to curry something other than the first arg, use `rot` then `curry`
   final inputStart = inputSlice.rot().curry(8);
   print(inputStart(3)); // prints "large" again
+
+  // Records
+
+  String takesStringAndInt(String s, int i) => "$s: $i";
+
+  // Say you have a record and you want to pass that to a function
+  // that takes values matching the record's elements:
+  (String, int) myRecord = ("Answer", 42);
+
+  // unfortunately, Dart does not allow
+  // takesStringAndInt(myRecord);
+  // but we can do similarly with conveniently:
+  String answer = myRecord.passTo(takesStringAndInt);
+  print(answer);
 }

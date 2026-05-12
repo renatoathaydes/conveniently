@@ -144,6 +144,8 @@ immediately.
 * `not`   - negate an asynchronous predicate.
 * `not$`  - negate a synchronous predicate.
 
+## Currying
+
 ### `<A, R> on R Function(A)`
 
 * `curry` - curries a function taking one argument, returning a no-args function.
@@ -161,6 +163,12 @@ immediately.
 * `curry3` - curries a function taking three arguments, returning a no-args function.
 * `rot` - rotates the order of the arguments of the function to the right (`(A, B, C)` => `(C, A, B)`).
 * `rotLeft` - rotates the order of the arguments of the function to the left (`(A, B, C)` => `(B, C, A)`).
+
+## Records
+
+### <A> on (A,), <A, B> on (A, B) ... <A, B, C, D, E, F, G, H> on (A, B, C, D, E, F, G, H)
+
+* `passTo` - calls a function taking parameters of types `A, B, C...` with a record of matching types.
 
 ## Examples
 

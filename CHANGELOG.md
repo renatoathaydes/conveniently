@@ -1,5 +1,9 @@
 # Conveniently Changelog
 
+## 1.4.0
+
+- Added record function: `passTo`. Convenience for calling functions using records.
+
 ## 1.3.0
 
 - Added `curry` for functions.

@@ -4,9 +4,10 @@
 library;
 
 export 'src/any.dart';
+export 'src/fun_extensions.dart';
 export 'src/functions.dart';
 export 'src/int.dart';
 export 'src/null.dart';
 export 'src/predicate.dart';
+export 'src/records.dart';
 export 'src/result.dart';
-export 'src/fun_extensions.dart';
